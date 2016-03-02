@@ -1,24 +1,44 @@
 package barqsoft.footballscores;
 
+import android.content.Context;
+import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by yehya khaled on 3/3/2015.
  */
-public class Utilies
+public class Utilities
 {
-    public static final int SERIE_A = 357;
-    public static final int PREMIER_LEGAUE = 354;
-    public static final int CHAMPIONS_LEAGUE = 362;
-    public static final int PRIMERA_DIVISION = 358;
-    public static final int BUNDESLIGA = 351;
+
+    /**
+     * Extra credits problem #1.1
+     * Fixed league IDs
+     */
+    public static final int BUNDESLIGA1 = 394;
+    public static final int BUNDESLIGA2 = 395;
+    public static final int LIGUE1 = 396;
+    public static final int LIGUE2 = 397;
+    public static final int PREMIER_LEAGUE = 398;
+    public static final int PRIMERA_DIVISION = 399;
+    public static final int SEGUNDA_DIVISION = 400;
+    public static final int SERIE_A = 401;
+    public static final int PRIMEIRA_LIGA = 402;
+    public static final int Bundesliga3 = 403;
+    public static final int EREDIVISIE = 404;
+    public static final int CHAMPIONS_LEAGUE  = 405;
+
     public static String getLeague(int league_num)
     {
         switch (league_num)
         {
             case SERIE_A : return "Seria A";
-            case PREMIER_LEGAUE : return "Premier League";
+            case PREMIER_LEAGUE : return "Premier League";
             case CHAMPIONS_LEAGUE : return "UEFA Champions League";
             case PRIMERA_DIVISION : return "Primera Division";
-            case BUNDESLIGA : return "Bundesliga";
+            case BUNDESLIGA1 : return "Bundesliga 1";
+            case PRIMEIRA_LIGA : return "Primeira Liga";
             default: return "Not known League Please report";
         }
     }
@@ -65,23 +85,38 @@ public class Utilies
         }
     }
 
-    public static int getTeamCrestByTeamName (String teamname)
+    public static int getTeamCrestByTeamName (Context context, String teamname)
     {
         if (teamname==null){return R.drawable.no_icon;}
         switch (teamname)
         { //This is the set of icons that are currently in the app. Feel free to find and add more
             //as you go.
-            case "Arsenal London FC" : return R.drawable.arsenal;
+            case "Arsenal FC" : return R.drawable.arsenal;
             case "Manchester United FC" : return R.drawable.manchester_united;
-            case "Swansea City" : return R.drawable.swansea_city_afc;
-            case "Leicester City" : return R.drawable.leicester_city_fc_hd_logo;
+            case "Swansea City FC" : return R.drawable.swansea_city_afc;
+            case "Leicester City FC" : return R.drawable.leicester_city_fc_hd_logo;
             case "Everton FC" : return R.drawable.everton_fc_logo1;
             case "West Ham United FC" : return R.drawable.west_ham;
             case "Tottenham Hotspur FC" : return R.drawable.tottenham_hotspur;
-            case "West Bromwich Albion" : return R.drawable.west_bromwich_albion_hd_logo;
+            case "West Bromwich Albion FC" : return R.drawable.west_bromwich_albion_hd_logo;
             case "Sunderland AFC" : return R.drawable.sunderland;
             case "Stoke City FC" : return R.drawable.stoke_city;
+            case "Aston Villa FC" : return R.drawable.aston_villa;
+            case "Chelsea FC" : return R.drawable.chelsea;
+            case "Liverpool FC" : return R.drawable.liverpool;
+            case "Manchester City FC" : return R.drawable.manchester_city;
+            case "Southampton FC" : return R.drawable.southampton_fc;
+            case "Newcastle United FC" : return R.drawable.newcastle_united;
+            case "Crystal Palace FC" : return R.drawable.crystal_palace_fc;
+
             default: return R.drawable.no_icon;
         }
+    }
+
+    // Gets today's date
+    public static String getTodayDate() {
+        Date fragmentdate = new Date(System.currentTimeMillis());
+        SimpleDateFormat mformat = new SimpleDateFormat("yyyy-MM-dd");
+        return mformat.format(fragmentdate);
     }
 }

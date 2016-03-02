@@ -4,11 +4,14 @@
     android:layout_height="wrap_content"
     android:elevation="4dp"
     android:background="@drawable/list_item"
+    android:id="@+id/scores_list_item_layout"
     >
     <LinearLayout
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
+        android:id="@+id/scores_item"
+        android:nextFocusUp="@id/scores_list_item_layout"
         >
         <LinearLayout
             android:layout_width="0dp"
