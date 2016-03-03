@@ -18,8 +18,8 @@ public class ViewHolder
     public ImageView home_crest;
     public ImageView away_crest;
     public double match_id;
-    public ViewHolder(View view)
-    {
+
+    public ViewHolder(View view) {
         scores_item = (LinearLayout) view.findViewById(R.id.scores_item);
         home_name = (TextView) view.findViewById(R.id.home_name);
         away_name = (TextView) view.findViewById(R.id.away_name);

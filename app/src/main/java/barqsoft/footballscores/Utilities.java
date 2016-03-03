@@ -1,20 +1,19 @@
 package barqsoft.footballscores;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by yehya khaled on 3/3/2015.
+ * Application generic Utilities
  */
 public class Utilities
 {
 
     /**
      * Extra credits problem #1.1
-     * Fixed league IDs
+     * Fixed league IDs, added some extra leagues
      */
     public static final int BUNDESLIGA1 = 394;
     public static final int BUNDESLIGA2 = 395;
@@ -89,8 +88,8 @@ public class Utilities
     {
         if (teamname==null){return R.drawable.no_icon;}
         switch (teamname)
-        { //This is the set of icons that are currently in the app. Feel free to find and add more
-            //as you go.
+        {
+            // Added icons for most Premier League teams
             case "Arsenal FC" : return R.drawable.arsenal;
             case "Manchester United FC" : return R.drawable.manchester_united;
             case "Swansea City FC" : return R.drawable.swansea_city_afc;

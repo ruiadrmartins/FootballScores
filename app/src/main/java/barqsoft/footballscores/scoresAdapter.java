@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * Created by yehya khaled on 2/26/2015.
+ * Adapter to fill up score items inside app
  */
 public class scoresAdapter extends CursorAdapter
 {
@@ -48,31 +48,46 @@ public class scoresAdapter extends CursorAdapter
 
         final ViewHolder mHolder = (ViewHolder) view.getTag();
 
-        mHolder.home_name.setText(cursor.getString(COL_HOME));
-        mHolder.away_name.setText(cursor.getString(COL_AWAY));
-        mHolder.date.setText(cursor.getString(COL_MATCHTIME));
-        mHolder.score.setText(Utilities.getScores(cursor.getInt(COL_HOME_GOALS),cursor.getInt(COL_AWAY_GOALS)));
-        mHolder.match_id = cursor.getDouble(COL_ID);
+        String homeTeam = cursor.getString(COL_HOME);
+        String awayTeam = cursor.getString(COL_AWAY);
+        String matchTime = cursor.getString(COL_MATCHTIME);
+        int homeGoals = cursor.getInt(COL_HOME_GOALS);
+        int awayGoals = cursor.getInt(COL_AWAY_GOALS);
+        double matchId = cursor.getDouble(COL_ID);
+        String matchDate = cursor.getString(COL_DATE);
+        String score = Utilities.getScores(homeGoals, awayGoals);
+
+        mHolder.home_name.setText(homeTeam);
+        mHolder.away_name.setText(awayTeam);
+        mHolder.home_name.setContentDescription(homeTeam);
+        mHolder.away_name.setContentDescription(awayTeam);
+
+        mHolder.date.setText(matchTime);
+        mHolder.date.setContentDescription(matchTime);
+        mHolder.score.setText(score);
+        mHolder.score.setContentDescription(score);
+
+        mHolder.match_id = matchId;
+
         mHolder.home_crest.setImageResource(Utilities.getTeamCrestByTeamName(
-                mContext, cursor.getString(COL_HOME)));
+                mContext, homeTeam));
         mHolder.away_crest.setImageResource(Utilities.getTeamCrestByTeamName(
-                mContext, cursor.getString(COL_AWAY)
-        ));
+                mContext, awayTeam));
+        mHolder.home_crest.setContentDescription(homeTeam);
+        mHolder.away_crest.setContentDescription(awayTeam);
 
         // Content description text for match
-        if(Utilities.getScores(cursor.getInt(COL_HOME_GOALS),cursor.getInt(COL_AWAY_GOALS)).equals(" - ")) {
+        if(score.equals(" - ")) {
             mHolder.scores_item.setContentDescription(
-                cursor.getString(COL_HOME) + mContext.getString(R.string.vs)
-                + cursor.getString(COL_AWAY)
-                + mContext.getString(R.string.at) + cursor.getString(COL_MATCHTIME)
-                + mContext.getString(R.string.on) + cursor.getString(COL_DATE)
+                homeTeam + mContext.getString(R.string.vs) + awayTeam
+                + mContext.getString(R.string.at) + matchTime
+                + mContext.getString(R.string.on) + matchDate
             );
         } else {
             mHolder.scores_item.setContentDescription(
-                cursor.getString(COL_HOME) + mContext.getString(R.string.vs)
-                + cursor.getString(COL_AWAY)
+                homeTeam + mContext.getString(R.string.vs) + awayTeam
                 + mContext.getString(R.string.score_is)
-                + Utilities.getScores(cursor.getInt(COL_HOME_GOALS),cursor.getInt(COL_AWAY_GOALS))
+                + Utilities.getScores(homeGoals, awayGoals)
             );
         }
 
@@ -107,7 +122,7 @@ public class scoresAdapter extends CursorAdapter
                 @Override
                 public void onClick(View v) {
                     //add Share Action
-                    context.startActivity(createShareForecastIntent(shareText));
+                    context.startActivity(createShareIntent(shareText));
                 }
             });
             share_button.setContentDescription(context.getString(R.string.share_text) + " " + shareText);
@@ -116,7 +131,7 @@ public class scoresAdapter extends CursorAdapter
         }
     }
 
-    public Intent createShareForecastIntent(String ShareText) {
+    public Intent createShareIntent(String ShareText) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");

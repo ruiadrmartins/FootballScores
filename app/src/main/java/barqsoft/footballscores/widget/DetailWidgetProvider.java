@@ -15,7 +15,8 @@ import barqsoft.footballscores.MainActivity;
 import barqsoft.footballscores.R;
 
 /**
- * Created by ruimartins on 24-02-2016.
+ * Widget Provider
+ * adapted from Advanced Android Development Github branch 7.04
  */
 public class DetailWidgetProvider extends AppWidgetProvider {
 

@@ -16,14 +16,15 @@ import android.widget.ListView;
 import barqsoft.footballscores.service.myFetchService;
 
 /**
- * A placeholder fragment containing a simple view.
+ * Main Screen Fragment of application
  */
 public class MainScreenFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>
 {
     public scoresAdapter mAdapter;
     public static final int SCORES_LOADER = 0;
+    public static String SELECTION_KEY = "selectionKey";
     private String[] fragmentdate = new String[1];
-    private int last_selected_item = -1;
+    private int last_selected_item = 0;
 
     public MainScreenFragment(){
     }
@@ -63,6 +64,14 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
             }
         });
 
+        if (savedInstanceState != null && savedInstanceState.containsKey(SELECTION_KEY)) {
+            last_selected_item = savedInstanceState.getInt(SELECTION_KEY);
+        }
+
+        // Added focus to last selected item, for navigation and a11y reasons
+        score_list.setSelection(last_selected_item);
+        score_list.requestFocus();
+
         return rootView;
     }
 
@@ -93,6 +102,12 @@ public class MainScreenFragment extends Fragment implements LoaderManager.Loader
         //Log.v(FetchScoreTask.LOG_TAG,"Loader query: " + String.valueOf(i));
         mAdapter.swapCursor(cursor);
         //mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(SELECTION_KEY,last_selected_item);
+        super.onSaveInstanceState(outState);
     }
 
     @Override

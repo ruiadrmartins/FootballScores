@@ -26,7 +26,7 @@ import barqsoft.footballscores.DatabaseContract;
 import barqsoft.footballscores.R;
 
 /**
- * Created by yehya khaled on 3/2/2015.
+ * Service for fetching score and game data
  */
 public class myFetchService extends IntentService
 {

@@ -3,10 +3,8 @@ package barqsoft.footballscores.widget;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
-import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -16,7 +14,8 @@ import barqsoft.footballscores.R;
 import barqsoft.footballscores.Utilities;
 
 /**
- * Created by ruimartins on 24-02-2016.
+ * Widget Service
+ * adapted from Advanced Android Development Github branch 7.04
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class DetailWidgetRemoteViewsService extends RemoteViewsService {
