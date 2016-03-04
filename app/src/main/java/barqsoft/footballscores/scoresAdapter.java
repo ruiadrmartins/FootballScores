@@ -55,7 +55,7 @@ public class scoresAdapter extends CursorAdapter
         int awayGoals = cursor.getInt(COL_AWAY_GOALS);
         double matchId = cursor.getDouble(COL_ID);
         String matchDate = cursor.getString(COL_DATE);
-        String score = Utilities.getScores(homeGoals, awayGoals);
+        String score = Utilities.getScores(context, homeGoals, awayGoals);
 
         mHolder.home_name.setText(homeTeam);
         mHolder.away_name.setText(awayTeam);
@@ -87,7 +87,7 @@ public class scoresAdapter extends CursorAdapter
             mHolder.scores_item.setContentDescription(
                 homeTeam + mContext.getString(R.string.vs) + awayTeam
                 + mContext.getString(R.string.score_is)
-                + Utilities.getScores(homeGoals, awayGoals)
+                + Utilities.getScores(context, homeGoals, awayGoals)
             );
         }
 
@@ -105,13 +105,13 @@ public class scoresAdapter extends CursorAdapter
                     ViewGroup.LayoutParams.MATCH_PARENT));
 
             TextView match_day = (TextView) v.findViewById(R.id.matchday_textview);
-            String matchDay = Utilities.getMatchDay(cursor.getInt(COL_MATCHDAY),
+            String matchDay = Utilities.getMatchDay(context, cursor.getInt(COL_MATCHDAY),
                     cursor.getInt(COL_LEAGUE));
             match_day.setText(matchDay);
             match_day.setContentDescription(matchDay);
 
             TextView league = (TextView) v.findViewById(R.id.league_textview);
-            String leagueText = Utilities.getLeague(cursor.getInt(COL_LEAGUE));
+            String leagueText = Utilities.getLeague(context, cursor.getInt(COL_LEAGUE));
             league.setText(leagueText);
             league.setContentDescription(leagueText);
 
